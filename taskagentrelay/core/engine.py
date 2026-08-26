@@ -41,7 +41,13 @@ class TaskEngine:
             task.state = "awaiting_approval"
             task.error = {"code": "APPROVAL_REQUIRED", "message": str(exc), "retryable": False}
             self.store.save(task)
-            self._record(TaskEvent(task.id, "task.awaiting_approval", {"capability": exc.capability}))
+            self._record(
+                TaskEvent(
+                    task_id=task.id,
+                    event="task.awaiting_approval",
+                    data={"capability": exc.capability},
+                )
+            )
             return ExecutionResult(state="awaiting_approval", error=task.error)
         except Exception as exc:  # noqa: BLE001 - task boundary
             task.state = "failed"
@@ -52,7 +58,7 @@ class TaskEngine:
                 "retryable": False,
             }
             self.store.save(task)
-            self._record(TaskEvent(task.id, "task.failed", task.error))
+            self._record(TaskEvent(task.id, "task.failed", data=task.error))
             return ExecutionResult(state="failed", error=task.error)
 
         task.state = result.state
@@ -61,5 +67,11 @@ class TaskEngine:
         task.artifacts = list(result.artifacts)
         self.store.save(task)
         event_name = "task.completed" if result.state == "completed" else "task.failed"
-        self._record(TaskEvent(task.id, event_name, {"result": result.result, "error": result.error}))
+        self._record(
+            TaskEvent(
+                task_id=task.id,
+                event=event_name,
+                data={"result": result.result, "error": result.error},
+            )
+        )
         return result
