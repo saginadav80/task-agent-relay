@@ -1,0 +1,10 @@
+{
+  "id": "example-write-file",
+  "source": "example",
+  "capability": "write_file",
+  "parameters": {
+    "path": "hello.txt",
+    "content": "Hello from TaskAgentRelay v0.1",
+    "mode": "create"
+  }
+}
