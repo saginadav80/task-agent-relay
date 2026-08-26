@@ -58,6 +58,21 @@ class Task:
             artifacts=list(data.get("artifacts") or []),
         )
 
+    def to_mapping(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "capability": self.capability,
+            "parameters": self.parameters,
+            "source": self.source,
+            "metadata": self.metadata,
+            "state": self.state,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "result": self.result,
+            "error": self.error,
+            "artifacts": self.artifacts,
+        }
+
 
 @dataclass(frozen=True, slots=True)
 class Capability:
