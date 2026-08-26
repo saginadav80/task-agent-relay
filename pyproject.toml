@@ -23,3 +23,6 @@ include = ["taskagentrelay*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = [
+    "integration: tests that require an external service such as PostgreSQL",
+]
