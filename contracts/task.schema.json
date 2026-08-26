@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TaskAgentRelay Task",
+  "type": "object",
+  "required": ["id", "capability"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "source": {"type": ["string", "null"]},
+    "capability": {"type": "string", "minLength": 1},
+    "parameters": {"type": "object"},
+    "metadata": {"type": "object"},
+    "state": {"enum": ["received", "running", "awaiting_approval", "completed", "failed", "cancelled"]},
+    "result": {},
+    "error": {"type": ["object", "null"]},
+    "artifacts": {"type": "array", "items": {"type": "object"}}
+  },
+  "additionalProperties": true
+}
