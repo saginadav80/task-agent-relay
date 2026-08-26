@@ -19,7 +19,7 @@
 
 - Formal package manifests and installation lifecycle.
 - Capability discovery and versioning.
-- Source package adapters.
+- Public `adapters/` model for external-system packages.
 - Safer upgrade/uninstall handling.
 - Additional practical capabilities and a scheduler source.
 
@@ -31,13 +31,14 @@
 - Timeouts, cancellation, and bounded retries.
 - Artifact handling.
 
-## v0.4 — more sources
+## v0.4 — external adapters
 
-- GitHub Issues/files as a real source integration.
-- Email.
-- Local task files.
-- Generic REST/webhook sources.
-- Chat sources where useful.
+- GitHub adapter with real event ingestion and result publishing.
+- n8n adapter.
+- Email adapter.
+- Local task-file adapter.
+- Generic REST/webhook adapter.
+- Chat adapters where useful.
 
 ## v0.5 — agent improvements
 
@@ -52,6 +53,6 @@ Multi-agent orchestration is intentionally deferred until a real use case requir
 
 - Permission and sandboxing improvements.
 - Secrets/credential isolation.
-- SDK for third-party capabilities and sources.
+- SDK for third-party capabilities and adapters.
 - Public package registry only after the local package model proves stable.
 - Observability, backups, recovery, and production hardening.
