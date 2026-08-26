@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from dataclasses import asdict, is_dataclass
 from pathlib import Path
 
 from .core.approval import ApprovalPolicy
@@ -46,12 +47,18 @@ def cmd_list_capabilities(_: argparse.Namespace) -> int:
     return 0
 
 
+def _json_default(value: object) -> object:
+    if is_dataclass(value):
+        return asdict(value)
+    raise TypeError(f"Object of type {type(value).__name__} is not JSON serializable")
+
+
 def cmd_run(args: argparse.Namespace) -> int:
     payload = json.loads(Path(args.file).read_text(encoding="utf-8"))
     task = Task.from_mapping(payload)
     engine = build_engine(args.workspace, approve=args.approve)
     result = engine.execute(task)
-    print(json.dumps({"task": task, "result": result}, default=lambda value: value.__dict__, indent=2, ensure_ascii=False))
+    print(json.dumps({"task": task, "result": result}, default=_json_default, indent=2, ensure_ascii=False))
     return 0 if result.state in {"completed", "awaiting_approval"} else 1
 
 
