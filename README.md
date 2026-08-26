@@ -33,16 +33,12 @@ The first slice is deliberately small:
 - Direct Agent implementation.
 - Capability and Implementation registry.
 - Local Runner with workspace isolation.
-- File Management capabilities:
-  - `read_file`
-  - `write_file`
-  - `list_files`
-  - `delete_file`
+- File Management capabilities: `read_file`, `write_file`, `list_files`, `delete_file`.
 - Approval gate for write/delete operations.
-- In-memory state for fast local operation.
-- Optional PostgreSQL persistence.
+- In-memory state plus optional PostgreSQL persistence.
 - Event recording.
-- CLI and unit/integration test coverage.
+- CLI: `doctor`, `capabilities`, `run`.
+- Unit/integration test coverage.
 
 ## Quick start
 
@@ -53,19 +49,19 @@ python -m pip install -e '.[test]'
 pytest
 ```
 
-Run diagnostics:
+Diagnostics:
 
 ```bash
 taskagentrelay doctor
 ```
 
-List capabilities:
+Capabilities:
 
 ```bash
 taskagentrelay capabilities
 ```
 
-Run the example task in the default workspace:
+Run a task in the default workspace:
 
 ```bash
 taskagentrelay run examples/tasks/write-file.json --approve
@@ -83,6 +79,19 @@ Local file operations are restricted to the configured workspace. Paths must be 
 
 Approval is required for write/delete capabilities unless explicitly approved by the caller.
 
+## Project structure
+
+```text
+core/            task lifecycle, orchestration, registries, storage
+sources/         adapters that turn external inputs into Tasks
+capabilities/    things TaskAgentRelay can do
+runners/         execution backends
+integrations/    external runtimes/services such as n8n
+packages/        distributable capability packages
+contracts/       machine-readable contracts
+cli/             user-facing administration and execution
+```
+
 ## Roadmap
 
-See `docs/ROADMAP.md` for the planned evolution from v0.1 to v1.0.
+See `docs/ROADMAP.md` for the evolution from v0.1 to v1.0.
