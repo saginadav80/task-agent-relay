@@ -1,0 +1,30 @@
+name: Feature request
+description: Propose a capability, source, runner, integration, or other improvement
+title: "[Feature] "
+labels: [feature]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For large changes, please discuss the problem before submitting implementation work.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem should this solve?
+      description: Focus on the user need rather than the implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like TaskAgentRelay to do?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What alternatives did you consider?
+  - type: textarea
+    id: scope
+    attributes:
+      label: Why does this belong in TaskAgentRelay?
