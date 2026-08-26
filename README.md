@@ -7,22 +7,26 @@ TaskAgentRelay receives tasks from different sources, resolves the required capa
 ## v0.1 architecture
 
 ```text
-Task Source
-    ↓
-Task
-    ↓
-Agent
-    ↓
-Capability
-    ↓
-Implementation
-    ↓
-Runner
-    ↓
-Result / Events
+External System
+      ↕
+   Adapter
+      ↓
+     Task
+      ↓
+    Agent
+      ↓
+ Capability
+      ↓
+ Implementation
+      ↓
+    Runner
+      ↓
+   Result
+      ↕
+   Adapter
 ```
 
-GitHub is one possible task source. n8n is an integration/backend, not the system model.
+An Adapter is the boundary between TaskAgentRelay and an external system. A single Adapter may ingest Tasks, query external information, and publish results or status. GitHub is one possible Adapter; n8n can be another. Neither is part of the Core model.
 
 ## Current v0.1 slice
 
@@ -83,14 +87,16 @@ Approval is required for write/delete capabilities unless explicitly approved by
 
 ```text
 core/            task lifecycle, orchestration, registries, storage
-sources/         adapters that turn external inputs into Tasks
+sources/         internal adapters that turn external inputs into Tasks (legacy v0.1 location)
+adapters/        external-system boundaries planned as the public modular integration surface
 capabilities/    things TaskAgentRelay can do
 runners/         execution backends
-integrations/    external runtimes/services such as n8n
 packages/        distributable capability packages
 contracts/       machine-readable contracts
 cli/             user-facing administration and execution
 ```
+
+The `sources/` directory is retained for the v0.1 implementation. New external-system packaging should use the `adapters/` model defined in `docs/architecture/adr-0001-external-adapters.md`.
 
 ## Roadmap
 
