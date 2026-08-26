@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "taskagentrelay"
+version = "0.1.0.dev0"
+description = "Agent-powered task execution framework with pluggable sources, capabilities, and runners."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{name = "Sagi Nadav"}]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
