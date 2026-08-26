@@ -1,0 +1,45 @@
+name: Bug report
+description: Report a reproducible problem in TaskAgentRelay
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please check the documentation and existing issues before opening a new report.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Describe the problem clearly and briefly.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How can we reproduce it?
+      description: Include the smallest possible reproduction, commands, or Task payload.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: TaskAgentRelay version
+      placeholder: 0.1.0-dev0
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, runner, integration, and other relevant details.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Remove secrets and personal information before posting logs.
+      render: text
