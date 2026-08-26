@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TaskAgentRelay Execution Result",
+  "type": "object",
+  "required": ["state"],
+  "properties": {
+    "state": {"enum": ["received", "running", "awaiting_approval", "completed", "failed", "cancelled"]},
+    "result": {},
+    "error": {"type": ["object", "null"]},
+    "artifacts": {"type": "array", "items": {"type": "object"}}
+  },
+  "additionalProperties": true
+}
