@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "taskagentrelay"
+version = "0.1.0.dev0"
+description = "Agent-powered task execution framework for tasks ordinary automation cannot complete alone."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{name = "Sagi Nadav"}]
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+postgres = ["psycopg[binary]>=3.2"]
+
+[project.scripts]
+taskagentrelay = "taskagentrelay.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["taskagentrelay*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "integration: tests that require an external service such as PostgreSQL",
+]

@@ -1,0 +1,24 @@
+{
+  "id": "file-management",
+  "version": "1.0.0",
+  "type": "capability-package",
+  "description": "Local workspace file capabilities for TaskAgentRelay.",
+  "core": ">=0.1.0",
+  "capabilities": [
+    "read_file",
+    "write_file",
+    "list_files",
+    "delete_file"
+  ],
+  "implementations": [
+    "read_file/local/v1",
+    "write_file/local/v1",
+    "list_files/local/v1",
+    "delete_file/local/v1"
+  ],
+  "permissions": [
+    "filesystem.read",
+    "filesystem.write"
+  ],
+  "runners": ["local"]
+}
